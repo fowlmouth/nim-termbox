@@ -1,5 +1,5 @@
 [package]
-name: "Termbox"
+name: "termbox"
 version: "1.0"
 author: "fowl"
 description: "Wrapper for Termbox, it beats the hell out of curses. (https://github.com/nsf/termbox)"
