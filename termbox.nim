@@ -162,9 +162,6 @@ proc poll_event*(event: ptr tb_event): cint
 const 
   TB_EOF* = - 1
 
-{.pop.} 
-{.push importc.}
-
 proc utf8_char_length*(c: char): cint
 proc utf8_char_to_unicode*(outp: ptr uint32; c: cstring): cint
 proc utf8_unicode_to_char*(outp: cstring; c: uint32): cint
