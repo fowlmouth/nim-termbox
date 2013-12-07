@@ -120,9 +120,13 @@ const
   TB_EPIPE_TRAP_ERROR* = - 3
 
 
-{.push callConv: cdecl, dynlib: LibName.}
+{.push callConv: cdecl, importc: "tb_$1".}
 
-{.push importc: "tb_$1".}
+when defined(LinkStatically):
+  {.passl: "-Wl,-Bstatic -ltermbox -Wl,-Bdynamic".}
+  {.push header: "<termbox.h>".}
+else:
+  {.push dynlib: LibName.}
 
 proc init*(): cint
 proc shutdown*()
