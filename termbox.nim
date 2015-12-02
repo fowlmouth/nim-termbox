@@ -30,6 +30,12 @@ const
   TB_KEY_ARROW_DOWN* = (0x0000FFFF - 19)
   TB_KEY_ARROW_LEFT* = (0x0000FFFF - 20)
   TB_KEY_ARROW_RIGHT* = (0x0000FFFF - 21)
+  TB_KEY_MOUSE_LEFT* = (0x0000FFFF - 22)
+  TB_KEY_MOUSE_RIGHT* = (0x0000FFFF - 23)
+  TB_KEY_MOUSE_MIDDLE* = (0x0000FFFF - 24)
+  TB_KEY_MOUSE_RELEASE* = (0x0000ffff - 25)
+  TB_KEY_MOUSE_WHEEL_UP* = (0x0000ffff - 26)
+  TB_KEY_MOUSE_WHEEL_DOWN* = (0x0000ffff - 27)
 # These are all keys below SPACE character and BACKSPACE key
 const
   TB_KEY_CTRL_TILDE* = 0x00000000
@@ -113,6 +119,8 @@ type
     ch*: uint32
     w*: int32
     h*: int32
+    x*: int32
+    y*: int32
 
 const
   TB_EUNSUPPORTED_TERMINAL* = - 1
@@ -142,14 +150,17 @@ proc change_cell*(x: cuint; y: cuint; ch: uint32; fg: uint16;
                      bg: uint16)
 proc blit*(x: cuint; y: cuint; w: cuint; h: cuint; cells: ptr tb_cell)
 const
+  TB_INPUT_CURRENT* = 0
   TB_INPUT_ESC* = 1
   TB_INPUT_ALT* = 2
+  TB_INPUT_MOUSE* = 4
 # with 0 returns current input mode
 proc select_input_mode*(mode: cint): cint
 proc set_clear_attributes*(fg: uint16; bg: uint16)
 const
   TB_EVENT_KEY* = 1
   TB_EVENT_RESIZE* = 2
+  TB_EVENT_MOUSE* = 3
 proc peek_event*(event: ptr tb_event; timeout: cuint): cint
 proc poll_event*(event: ptr tb_event): cint
 # these return:
